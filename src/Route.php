@@ -2,8 +2,8 @@
 
 class RouteException extends \Exception {}
 
-class Route {
-
+class Route 
+{
     /**
      * uri 
      * 

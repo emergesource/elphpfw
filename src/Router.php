@@ -1,5 +1,7 @@
 <?php namespace el;
 
+class RouterException extends \Exception {};
+
 class Router
 {
     /**
@@ -20,7 +22,7 @@ class Router
     public function addRoute($name, $uri)
     {
         if (!array_key_exists($uri, $this->routes)) {
-            $route = new Route($name, $uri);
+            $route = new Route($uri, $name);
             $this->routes[$uri] = $route;
         }         
     }
@@ -44,16 +46,14 @@ class Router
      * If a match doesn't exist, create a default route
      * 
      * @param string $uri uri 
-     * 
+     * @throws RouterException 
      * @return Route 
      */
     public function match($uri)
     {
         // if there is not a named route, create default one
         if (!array_key_exists($uri, $this->routes)) {
-            $route = new Route('default', $uri);
-            $route->setDefaultTarget($uri);
-            return $route;
+            throw new RouterException('No match for route: ' . $uri);
         }
         return $this->routes[$uri];
     }
