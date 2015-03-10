@@ -2,8 +2,25 @@
 
 class Request
 {
+    /**
+     * get/post params
+     *
+     * @var array 
+     */
     protected $params;
+
+    /**
+     * server 
+     *
+     * @var array
+     */
     protected $server;
+
+    /**
+     * cookies 
+     * 
+     * @var array
+     */
     protected $cookies;
 
     public function __construct($get, $post, $server, $cookies)
