@@ -40,4 +40,20 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $router = new Router;
         $router->match('/test/route');
     }
+
+    /**
+     * test load 
+     */
+    public function testLoad()
+    {
+        $router = new Router;
+        $router->load(array(
+            'route' => array(
+                'uri' => '/test/route',
+                'method' => 'get',
+                'target' => 'test\target:index'
+            )
+        ));
+        $this->assertArrayHasKey('/test/route', $router->routes);
+    }
 }

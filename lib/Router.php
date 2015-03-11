@@ -57,4 +57,27 @@ class Router
         }
         return $this->routes[$uri];
     }
+
+    /**
+     * Load routes 
+     * 
+     * @param array $routes routes
+     */
+    public function load($routes = array())
+    {
+        foreach($routes as $key => $route) {
+            $this->addRoute($key, $route['uri']); 
+            $this->setTarget($route['uri'], $route['target']);
+        } 
+    }
+
+    /**
+     * Get routes
+     * 
+     * @return array routes
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
 }
