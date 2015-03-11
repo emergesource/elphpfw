@@ -9,7 +9,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "el\\": "lib"
+            "el\\": "lib",
+            "home\\": "app/home"
         }
     },
     "require": {

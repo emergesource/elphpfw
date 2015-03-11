@@ -6,4 +6,8 @@ $routes = require_once('../config/routes.php');
 $router = new el\Router;
 $router->load($routes);
 
-var_dump($router->getRoutes());
+$request = new el\Request($_GET, $_POST, $_SERVER, $_COOKIE);
+
+$requestHandler = new el\RequestHandler($request, $router);
+$requestHandler->run();
+
