@@ -23,13 +23,20 @@ class RequestHandler
         $route = $this->router->match($this->request->getUri());
 
         try {
-            $class = $route->getController();
-            $views = $this->di->make($class);
-            $action = $route->getAction();
-            $views->$action();
+
+            $this->dispatch($route);
+
         } catch (Exception $e) {
             var_dump($e->getMessage());
             return;
         }
     } 
+
+    public function dispatch($route)
+    {
+        $class = $route->getController();
+        $controller = $this->di->make($class);
+        $action = $route->getAction();
+        $controller->$action();
+    }
 }
