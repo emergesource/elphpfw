@@ -1,6 +1,7 @@
 <?php
 
-require_once('../vendor/autoload.php');
+// use composer autoloader
+include __DIR__ . '/../vendor/autoload.php';
 
 $routes = require_once('../config/routes.php');
 $router = new el\Router;
