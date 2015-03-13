@@ -20,7 +20,9 @@ $matcher = new UrlMatcher($routes, $context);
 
 try {
     $match = $matcher->match($request->getPathInfo());
-    var_dump($match);
+    
+    $class = new $match['controller'];
+    $class->$match['action']();
 
 } catch (ResourceNotFoundException $e) {
     $response->setStatusCode('404');

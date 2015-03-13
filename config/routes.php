@@ -6,7 +6,8 @@ use Symfony\Component\Routing\Route;
 $routes = new RouteCollection();
 
 $routes->add('home', new Route( '/', [
-    'controller' => 'home\views', 'action' => 'index'
+    'controller' => 'home\views', 
+    'action' => 'index'
 ]));
 
 return $routes;
