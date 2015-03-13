@@ -4,6 +4,7 @@ class views
 {
     public function index()
     {
-        var_dump('home/views/index');
+        // controller just returns content & status
+        return [ 'home/views/index', 200 ];
     }
 }

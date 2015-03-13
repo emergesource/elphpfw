@@ -22,7 +22,10 @@ class RequestHandler
             $match = $this->matcher->match($request->getPathInfo());
     
             $class = new $match['controller'];
-            $content = $class->$match['action']();
+            list ($content, $status) = $class->$match['action']();
+
+            $response->setStatusCode($status);
+            $response->setContent($content);
 
         } catch (ResourceNotFoundException $e) {
             $response->setStatusCode('404');
