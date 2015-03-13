@@ -1,42 +1,36 @@
 <?php namespace el;
 
-use Auryn\Provider;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class RequestHandler
 {
-    protected $di;
     protected $request;
     protected $response;
-    protected $router;
+    protected $matcher;
 
-    public function __construct(Request $request, Router $router)
+    public function __construct(UrlMatcher $matcher)
     {
-        $this->request = $request;
-        $this->router = $router;
-
-        $this->di = new \Auryn\Provider();
-        $this->di->share($this->request);
+        $this->matcher = $matcher;
     }
 
-    public function run()
+    public function run(Request $request, Response $response)
     {
-        $route = $this->router->match($this->request->getUri());
-
         try {
+            $match = $this->matcher->match($request->getPathInfo());
+    
+            $class = new $match['controller'];
+            $content = $class->$match['action']();
 
-            $this->dispatch($route);
+        } catch (ResourceNotFoundException $e) {
+            $response->setStatusCode('404');
+            $response->setContent('Not found');
 
         } catch (Exception $e) {
-            var_dump($e->getMessage());
-            return;
+            $response->setStatusCode('500');
+            $response->setContent('An error occured');
         }
     } 
-
-    public function dispatch($route)
-    {
-        $class = $route->getController();
-        $controller = $this->di->make($class);
-        $action = $route->getAction();
-        $controller->$action();
-    }
 }
