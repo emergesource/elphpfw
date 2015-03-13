@@ -40,11 +40,11 @@ class RequestHandler
 
         } catch (ResourceNotFoundException $e) {
             $response->setStatusCode('404');
-            $response->setContent('Not found');
+            $response->setContent($this->template->render('404.html'));
 
         } catch (Exception $e) {
             $response->setStatusCode('500');
-            $response->setContent('An error occured');
+            $response->setContent($this->template->render('500.html'));
         }
     } 
 }
