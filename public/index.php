@@ -1,5 +1,10 @@
 <?php
 
+// check for PHP version 5.4 (we use traits)
+if (version_compare(PHP_VERSION, '5.4', '<')) {
+    exit("ERROR: Requires PHP 5.4 or greater.");
+}
+
 // Composer autoloader
 include __DIR__ . '/../vendor/autoload.php';
 
