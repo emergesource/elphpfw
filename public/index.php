@@ -3,12 +3,23 @@
 // use composer autoloader
 include __DIR__ . '/../vendor/autoload.php';
 
-$routes = require_once('../config/routes.php');
-$router = new el\Router;
-$router->load($routes);
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-$request = new el\Request($_GET, $_POST, $_SERVER, $_COOKIE);
+$request = Request::createFromGlobals();
+$response = new Response;
 
-$requestHandler = new el\RequestHandler($request, $router);
-$requestHandler->run();
+$response->setStatusCode('404');
+$response->setContent('Not Found');
+
+$response->send();
+
+// $routes = require_once('../config/routes.php');
+// $router = new el\Router;
+// $router->load($routes);
+//
+// $request = new el\Request($_GET, $_POST, $_SERVER, $_COOKIE);
+//
+// $requestHandler = new el\RequestHandler($request, $router);
+// $requestHandler->run();
 

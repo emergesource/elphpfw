@@ -15,6 +15,7 @@
     },
     "require": {
         "rdlowrey/auryn": "~0.14",
-        "patricklouys/http": ">=1.1.0"
+        "patricklouys/http": ">=1.1.0",
+        "symfony/http-foundation": "2.6"
     }
 }
