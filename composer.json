@@ -17,6 +17,6 @@
         "rdlowrey/auryn": "~0.14",
         "patricklouys/http": ">=1.1.0",
         "symfony/http-foundation": "2.6",
-        "nikic/fast-route": "0.2.*"
+        "symfony/routing": "2.6"
     }
 }
