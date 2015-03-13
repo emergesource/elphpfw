@@ -1,10 +1,16 @@
 <?php namespace home;
 
+use el\TemplateAwareTrait;
+
 class views
 {
+    use TemplateAwareTrait;
+
     public function index()
     {
-        // controller just returns content & status
-        return [ 'home/views/index', 200 ];
+        $content = $this->getTemplate()->render('home.html');
+        // var_dump($this->getTemplate());
+        // Actions just return content & status
+        return [ $content, 200 ];
     }
 }
