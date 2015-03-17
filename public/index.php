@@ -8,6 +8,9 @@ if (version_compare(PHP_VERSION, '5.4', '<')) {
 // Composer autoloader
 include __DIR__ . '/../vendor/autoload.php';
 
+// application config
+include __DIR__ .'/../config/app.php';
+
 // load routes
 include __DIR__ . '/../config/routes.php';
 

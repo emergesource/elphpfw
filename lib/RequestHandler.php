@@ -4,16 +4,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use el\Traitor;
+use Maestro;
 
 class RequestHandler
 {
     protected $matcher;
+    protected $loader;
+    protected $template;
 
     public function __construct(UrlMatcher $matcher)
     {
         $this->matcher = $matcher;
-        $loader = new \Twig_Loader_Filesystem(__DIR__ .  '/../templates');
-        $this->template = new \Twig_Environment($loader, [
+        $this->loader = new \Twig_Loader_Filesystem(__DIR__ .  '/../templates');
+        $this->template = new \Twig_Environment($this->loader, [
             'cache' => __DIR__ . '/../templates/.cache',
             'auto_reload' => true
         ]);
@@ -23,12 +27,18 @@ class RequestHandler
     {
         try {
             $match = $this->matcher->match($request->getPathInfo());
-    
+              
             $controller = new $match['controller'];
             $traits = class_uses($controller);
 
             foreach($traits as $trait) { 
                 if ($trait == 'el\TemplateTrait') {
+                    $maestro = new Maestro(PROJECT_ROOT);
+                    $this->loader->prependPath(
+                        $maestro->getBaseDir($match['controller'])
+                        . DIRECTORY_SEPARATOR 
+                        . TEMPLATES
+                    );
                     $controller->setTemplate($this->template);
                 }
             }
@@ -40,11 +50,11 @@ class RequestHandler
 
         } catch (ResourceNotFoundException $e) {
             $response->setStatusCode('404');
-            $response->setContent($this->template->render('404.html'));
+            $response->setContent($this->container['template']->render('404.html'));
 
         } catch (Exception $e) {
             $response->setStatusCode('500');
-            $response->setContent($this->template->render('500.html'));
+            $response->setContent($this->container['template']->render('500.html'));
         }
     } 
 }

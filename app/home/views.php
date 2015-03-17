@@ -8,10 +8,13 @@ class views
 
     public function index()
     {
-        // $content = 'yo yo ma';
         $content = $this->getTemplate()->render('index.html');
-        // var_dump($this->getTemplate());
-        // Actions just return content & status
+        return [ $content, 200 ];
+    }
+
+    public function home()
+    {
+        $content = $this->getTemplate()->render('home.html');
         return [ $content, 200 ];
     }
 }
