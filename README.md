@@ -1,14 +1,21 @@
 # Eluisvelabs PHP Framework
 A Django inspired modular MVC for PHP.
 
-### Key Features
+### Route to any psr4 class and use it as a controller.
+```php
+$routes->add('controller', new Route( '/', [
+    'controller' => 'any\psr4\namespace\controller', 
+    'action' => 'index'
+]));
+```
 
-* Django style app/view/template MVC
-* Route directly to a composer package that follows the app/view/template
-  structure
-* Depandancy injected controller eliminates the need for subclassing.  You will
-  actually be able to test your controllers!
-
-### Installation
-
-### Quickstart 
+#### Your controller does not depend on a base class
+```php
+class MyController
+{
+    public function index()
+    {
+        return ['some content', 200];
+    }
+}
+```
