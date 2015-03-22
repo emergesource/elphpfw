@@ -1,4 +1,4 @@
-# Eluisvelabs PHP Framework
+# Elusivelabs PHP Framework
 A Django inspired modular MVC for PHP.
 
 #### Route to any psr4 class and use it as a controller
