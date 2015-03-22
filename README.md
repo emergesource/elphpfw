@@ -49,3 +49,20 @@ class MyControlller
     }
 }
 ```
+
+#### Inject objects into the constructor of your controller
+```php
+<?php namespace MyModule
+
+use Symfony\Component\HttpFoundation\Request;
+
+class MyController()
+{
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request; 
+    }
+}
+```
