@@ -1,10 +1,21 @@
 <?php namespace home;
 
 use el\TemplateTrait;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class views
 {
     use TemplateTrait;
+
+    protected $request;
+    protected $response;
+
+    public function __construct(Request $request, Response $response)
+    {
+        $this->request = $request;
+        $this->response = $response;
+    }
 
     public function index()
     {

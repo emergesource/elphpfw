@@ -5,14 +5,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Maestro;
+use Auryn\Provider;
 
 class RequestHandler
 {
     protected $matcher;
     protected $loader;
     protected $template;
+    protected $di;
 
-    public function __construct(UrlMatcher $matcher)
+    public function __construct(UrlMatcher $matcher, Provider $di)
     {
         $this->matcher = $matcher;
         $this->loader = new \Twig_Loader_Filesystem(__DIR__ .  '/../templates');
@@ -20,6 +22,7 @@ class RequestHandler
             'cache' => __DIR__ . '/../templates/.cache',
             'auto_reload' => true
         ]);
+        $this->di = $di;
     }
 
     public function run(Request $request, Response $response)
@@ -27,7 +30,7 @@ class RequestHandler
         try {
             $match = $this->matcher->match($request->getPathInfo());
               
-            $controller = new $match['controller'];
+            $controller = $this->di->make($match['controller']);
             $traits = class_uses($controller);
 
             foreach($traits as $trait) { 
