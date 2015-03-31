@@ -20,7 +20,7 @@ class views
     public function index()
     {
         $content = $this->getTemplate()->render('index.html');
-        return [ $content, 200 ];
+        return $content;
     }
 
     public function home()

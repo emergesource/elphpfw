@@ -45,8 +45,10 @@ class RequestHandler
                 }
             }
 
-            list ($content, $status) = $controller->$match['action']();
-
+            list($content, $status) = $this->parseActionResponse(
+                $controller->$match['action']()
+            );
+            
             $response->setStatusCode($status);
             $response->setContent($content);
 
@@ -59,4 +61,27 @@ class RequestHandler
             $response->setContent($this->container['template']->render('500.html'));
         }
     } 
+
+    /**
+     * Parse an action response.
+     * Prepare and add defaults to action response data
+     * 
+     * @param mixed $actionResponse actionResponse 
+     * @return list ($content, $status)
+     */
+    public function parseActionResponse($actionResponse)
+    {
+        $content = '';
+        $status = 200;
+
+        // use both the content and status from the action response
+        if (is_array($actionResponse)) {
+            list($content, $status) = $actionResponse;
+        }
+
+        // use the content, and default status from the action response
+        $content = $actionResponse;
+        
+        return [ $content, $status ];
+    }
 }
