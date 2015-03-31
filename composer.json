@@ -14,6 +14,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/colincode/maestro.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/metrophp/metrodb.git"
         }
     ],
     "autoload": {
@@ -24,11 +28,11 @@
     },
     "require": {
         "rdlowrey/auryn": "~0.14",
-        "patricklouys/http": ">=1.1.0",
         "symfony/http-foundation": "2.6",
         "symfony/routing": "2.6",
         "twig/twig": "~1.0",
-        "pimple/pimple": "~3.0",
-        "maestro": "dev-master"
+        "maestro": "dev-master",
+        "metrodb": ">=1.2.0"
+
     }
 }
