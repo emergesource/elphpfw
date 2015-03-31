@@ -11,12 +11,22 @@ $routes->add('controller', new Route( '/', [
 ...
 ```
 
-#### Actions return content & staus 
+#### Actions return content & status 
 ```php
     ... 
     public function index()
     {
         return['content', 200] 
+    }
+    ...
+```
+
+#### Or, if you omit the status, it will default to 200
+```php
+    ... 
+    public function index()
+    {
+        return 'content';
     }
     ...
 ```
