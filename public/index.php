@@ -17,13 +17,9 @@ include __DIR__ . '/../config/routes.php';
 // di container
 include __DIR__ . '/../config/deps.php';
 
-use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
-$context = new RequestContext();
-$context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
-
 $requestHandler = new el\RequestHandler($matcher, $di);
 $requestHandler->run($request, $response);
 
