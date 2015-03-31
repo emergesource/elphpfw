@@ -33,6 +33,5 @@
         "twig/twig": "~1.0",
         "maestro": "dev-master",
         "metrodb": ">=1.2.0"
-
     }
 }

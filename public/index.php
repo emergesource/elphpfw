@@ -17,6 +17,10 @@ include __DIR__ . '/../config/routes.php';
 // di container
 include __DIR__ . '/../config/deps.php';
 
+// database settings
+$dsn = include __DIR__ . '/../config/db.php';
+Metrodb_Connector::setDsn($dsn['name'], $dsn['dsn']);
+
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 $matcher = new UrlMatcher($routes, $context);

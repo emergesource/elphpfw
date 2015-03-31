@@ -19,4 +19,3 @@ $di->share($response);
 $context = new RequestContext();
 $context->fromRequest($request);
 $di->share($context);
-
