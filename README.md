@@ -21,7 +21,7 @@ $routes->add('controller', new Route( '/', [
     ...
 ```
 
-#### Or, if you omit the status, it will default to 200
+##### Or, if you omit the status, it will default to 200
 ```php
     ... 
     public function index()
